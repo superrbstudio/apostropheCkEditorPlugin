@@ -104,7 +104,7 @@ class aEditorCk extends aEditor
     }
 
     $ckEditor->config['toolbar'] = $toolbar;
-    $ckEditor->config['format_tags'] = 'p;h3;h4;h5;h6;code';
+    $ckEditor->config['format_tags'] = sfConfig::get('app_a_ckEditor_format_tags', 'p;h3;h4;h5;h6;pre');
 
     $content = "<script type=\"text/javascript\" charset=\"utf-8\">if (CKEDITOR.instances['$name']) { delete CKEDITOR.instances['$name'] };</script>";
     $content .= $ckEditor->editor($options['name'], $value);

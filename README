@@ -2,13 +2,8 @@ This is a work in progress. It works.
 
 KNOWN PROBLEMS
 
-* The Format menu shows a lot of things we normally would kick out of there. Need to fix that to avoid abuse of h1 and h2 which are reserved for layout in Apostrophe.
 * The editor comes out a little wider than it should.
-* I haven't figured out what the list elements are called in the new toolbars yet,
-so the defaults have no list elements
-* The spellchecker isn't appearing (and if it did, it would be a free-with-ads 
-version of a commercial online spellchecking service, according to the CKEditor 
-documentation)
+* I have not made a spellchecker available because ckeditor's spellchecker is an ad-supported product from spellcheck.net, probably not something our clients want. Look The spellchecker isn't appearing (and if it did, it would be a free-with-ads version of a commercial online spellchecking service, according to the CKEditor documentation). Maybe this will mature: http://cksource.com/forums/viewtopic.php?f=11&t=15893
 * Loading it all the time via view.yml is inefficient
 * Doesn't replace FCK in the media description field yet for some reason 
 
