@@ -1,0 +1,33 @@
+This is a work in progress. It works. 
+
+KNOWN PROBLEMS
+
+* The Format menu shows a lot of things we normally would kick out of there. Need to fix that to avoid abuse of h1 and h2 which are reserved for layout in Apostrophe.
+* The editor comes out a little wider than it should.
+* I haven't figured out what the list elements are called in the new toolbars yet,
+so the defaults have no list elements
+* The spellchecker isn't appearing (and if it did, it would be a free-with-ads 
+version of a commercial online spellchecking service, according to the CKEditor 
+documentation)
+* Loading it all the time via view.yml is inefficient
+* Doesn't replace FCK in the media description field yet for some reason 
+
+INSTALLATION
+
+* Add this plugin and enable it in ProjectConfiguration.class.php
+* Set app_a_editor to ck
+* Add - /apostropheCkEditorPlugin/js/ckeditor/ckeditor.js to your javascripts list 
+in view.yml
+* symfony cc
+
+Boom! ckeditor replaces fckeditor in rich text slots. And shortly, everywhere
+in Apostrophe.
+
+You can have a ckextraconfig.js (like fckextraconfig.js) but you probably won't 
+need one if all you want to do is override the toolbars, because you can do that
+in app.yml. See aCkEditor.class.php for the default settings which you'll need
+to convert to YAML to keep the existing toolbars if you choose to override this.
+
+Feedback & patches welcome
+
+- tom@punkave.com
