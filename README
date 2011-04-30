@@ -1,11 +1,11 @@
-This is a work in progress. It works. 
+This is a work in progress. It works pretty darn well at this point.
 
 KNOWN PROBLEMS
 
-* The editor comes out a little wider than it should.
+* If you pick the kama skin the editor comes out a little too wide. Don't use kama until ckeditor bug #4049 is fixed for percentage widths. Now defaulting to the v2 skin
+* The background color is always gray in the toolbar. This is a limitation of the v2 skin, it'd be nice to work around it
 * I have not made a spellchecker available because ckeditor's spellchecker is an ad-supported product from spellcheck.net, probably not something our clients want. Look The spellchecker isn't appearing (and if it did, it would be a free-with-ads version of a commercial online spellchecking service, according to the CKEditor documentation). Maybe this will mature: http://cksource.com/forums/viewtopic.php?f=11&t=15893
 * Loading it all the time via view.yml is inefficient
-* Doesn't replace FCK in the media description field yet for some reason 
 
 INSTALLATION
 
