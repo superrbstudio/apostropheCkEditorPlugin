@@ -87,10 +87,10 @@ class aEditorCk extends aEditor
 
     // ACHTUNG: the kama skin has a bug that makes everything 12px too wide, see ckeditor bug #4049.
     // Otherwise we'd use it to get uiColor
-    $ckEditor->config['skin'] = sfConfig::get('app_a_ckEditor_skin', 'v2');
+    $ckEditor->config['skin'] = sfConfig::get('app_a_ckEditor_skin', 'adefault');
 
     // Sadly this works only with the kama skin. Not a bug, that's how it is in ckeditor land
-    $ckEditor->config['uiColor'] = sfConfig::get('app_a_ckEditor_uiColor', '#ffffff');
+    $ckEditor->config['uiColor'] = sfConfig::get('app_a_ckEditor_uiColor', '#cccccc');
     $uiColor = $ckEditor->config['uiColor'];
     
     if (isset($options['width']))
