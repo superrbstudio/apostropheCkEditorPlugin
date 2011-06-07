@@ -90,7 +90,7 @@ class aEditorCk extends aEditor
     $ckEditor->config['skin'] = sfConfig::get('app_a_ckEditor_skin', 'adefault');
 
     // Sadly this works only with the kama skin. Not a bug, that's how it is in ckeditor land
-    $ckEditor->config['uiColor'] = sfConfig::get('app_a_ckEditor_uiColor', '#cccccc');
+    $ckEditor->config['uiColor'] = sfConfig::get('app_a_ckEditor_uiColor', '#e1e1e1');
     $uiColor = $ckEditor->config['uiColor'];
     
     if (isset($options['width']))

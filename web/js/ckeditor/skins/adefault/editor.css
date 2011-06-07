@@ -16,12 +16,3 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /*remove ugly webkit outline on focus*/
 .cke_skin_adefault .cke_focus { outline: none !important; }
-
-.cke_skin_adefault .cke_wrapper
-{
-	-moz-box-shadow:0px 0px 5px rgba(0, 0, 0, 0.3);
-	-webkit-box-shadow:0px 0px 5px rgba(0, 0, 0, 0.3);
-	-opera-box-shadow:0px 0px 5px rgba(0, 0, 0, 0.3);
-	-khtml-box-shadow:0px 0px 5px rgba(0, 0, 0, 0.3);
-	box-shadow:0px 0px 5px rgba(0, 0, 0, 0.3);
-}
