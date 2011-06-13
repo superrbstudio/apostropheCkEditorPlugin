@@ -44,7 +44,7 @@ class aEditorCk extends aEditor
     $options = $attributes;
 
     // sf_web_dir already contains the relative root, don't append it twice
-    $php_file = sfConfig::get('sf_plugins_dir') . '/apostropheCkEditorPlugin/web/js/ckeditor/ckeditor.php';
+    $php_file = sfConfig::get('sf_plugins_dir') . '/apostropheCKEditorPlugin/web/js/ckeditor/ckeditor.php';
 
     // If you override this to add toolbars, you must also reproduce the settings here
     // for the existing toolbars
