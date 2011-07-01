@@ -1,21 +1,28 @@
-This is a work in progress. It works pretty darn well at this point.
+This plugin has matured to the point where we use it on our own client projects.
 
 KNOWN PROBLEMS
 
-* If you pick the kama skin the editor comes out a little too wide. Don't use kama until ckeditor bug #4049 is fixed for percentage widths. Now defaulting to the v2 skin
-* The background color is always gray in the toolbar. This is a limitation of the v2 skin, it'd be nice to work around it
-* I have not made a spellchecker available because ckeditor's spellchecker is an ad-supported product from spellcheck.net, probably not something our clients want. Look The spellchecker isn't appearing (and if it did, it would be a free-with-ads version of a commercial online spellchecking service, according to the CKEditor documentation). Maybe this will mature: http://cksource.com/forums/viewtopic.php?f=11&t=15893
-* Loading it all the time via view.yml is inefficient
+* We fixed a bug with percentage widths and the kama skin in our own version, "aDefault," so that's the default skin you get. Not really a problem, just something to be aware of
+* I have not made a spellchecker available because ckeditor's spellchecker is an ad-supported product from spellcheck.net, probably not something our clients want. Maybe this will mature: http://cksource.com/forums/viewtopic.php?f=11&t=15893
+* Loading it all the time via view.yml is a bit inefficient. However the design of the CKEditor seems to make this hard to avoid, because they call document.write() in their loader code, somethign that would wreck the whole page if done at AJAX time. They also expect to see themselves in a script src tag in the DOM
 
 INSTALLATION
 
 * Add this plugin and enable it in ProjectConfiguration.class.php
 * Set app_a_editor to ck
 * Add - /apostropheCkEditorPlugin/js/ckeditor/ckeditor.js to your javascripts list 
-in view.yml
+in view.yml. You must turn off the minifier for this file. Note that your Apostrophe 1.5 plugin must be up to date with svn commit [3845] for this feature to work:
+
+default:
+   javascripts:
+    # ckeditor needs to see itself in a script src tag, 
+    # so don't attempt to minify it in with the rest. 
+    # Also it comes preminified
+    - /apostropheCKEditorPlugin/js/ckeditor/ckeditor.js: { data-minify: 0 }
+
 * symfony cc
 
-Boom! ckeditor replaces fckeditor in rich text slots. And shortly, everywhere
+Boom! ckeditor replaces fckeditor in rich text slots. And everywhere else
 in Apostrophe.
 
 You can have a ckextraconfig.js (like fckextraconfig.js) but you probably won't 
@@ -23,6 +30,12 @@ need one if all you want to do is override the toolbars, because you can do that
 in app.yml. See aCkEditor.class.php for the default settings which you'll need
 to convert to YAML to keep the existing toolbars if you choose to override this.
 
-Feedback & patches welcome
+Feedback & patches welcome. Please raise issues (and throw roses) in the apostrophenow Google Group:
 
-- tom@punkave.com
+https://groups.google.com/d/forum/apostrophenow
+
+And via trac:
+
+http://trac.apostrophenow.org/
+
+- The P'unk Avenue crew
