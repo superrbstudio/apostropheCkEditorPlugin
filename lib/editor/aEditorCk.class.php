@@ -156,7 +156,7 @@ class aEditorCk extends aEditor
 <script type="text/javascript" charset="utf-8">
 $(function() {
   // The hidden textarea has no id, we have to go by name
-  var textarea = $('[name=$name]');
+  var textarea = $('[name="$name"]');
   textarea.addClass('a-needs-update');
   textarea.bind('a.update', function() {
     apostrophe.log("Well we got this far");
