@@ -18,7 +18,7 @@ default:
     # ckeditor needs to see itself in a script src tag, 
     # so don't attempt to minify it in with the rest. 
     # Also it comes preminified
-    - /apostropheCKEditorPlugin/js/ckeditor/ckeditor.js: { data-minify: 0 }
+    - /apostropheCkEditorPlugin/js/ckeditor/ckeditor.js: { data-minify: 0 }
 
 * symfony cc
 
