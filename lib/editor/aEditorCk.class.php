@@ -72,13 +72,17 @@ class aEditorCk extends aEditor
       $toolbar = $toolbars['Default'];
     }
     
-    require_once($php_file);
-
     // ckEditor has the same "name and id are assumed to be the same" problem as fckEditor ):
-    $ckEditor = new CKEditor();
-    $ckEditor->returnOutput = true;
+
+    $stem = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
+    // We generally don't add slashes to directories, but CKEditor does
+    $basePath = $stem . '/apostropheCkEditorPlugin/js/ckeditor/';
+    $ckeditorPath = $basePath;
+    
+    $ckEditor = new aCkEditorOverrideable($basePath);
+    
     // ckEditor's "find myself and bring myself in via a script tag" support is confused by Symfony's layout,
-    // so we do it ourselves in view.yml (for now; we'll do it better)
+    // so we do it ourselves
     $ckEditor->initialized = true;
 
     // You can configure anything ckeditor allows by specifying a full config array. The other options
@@ -117,64 +121,86 @@ class aEditorCk extends aEditor
     // but we already pulled it out of the DOM to work with Apostrophe's refresh model for edit views.
     // http://stackoverflow.com/questions/2310111/uncaught-ckeditor-editor-the-instance-html-already-exists
 
-    $content = "<script type=\"text/javascript\" charset=\"utf-8\">if (CKEDITOR.instances['$name']) { delete CKEDITOR.instances['$name'] };</script>";
-// This is an interesting idea but I don't have the styles quite right, there's a 1px bump in the thickness of things as
-// I hover them. Also the styles ought to be specific to the individual instance to avoid busting all other instances if
-// they are colored differently. Sure wish they'd just fix ckeditor #4049!
-//     if ($ckEditor->config['skin'] === 'v2')
-//     {
-//       // We trick the v2 skin into looking the way we styled FCK.
-//       // It doesn't support a uiColor option natively like kama does
-//       // (and kama has a width bug so we can't use it)
-//       $content .= <<<EOM
-// <style>
-// .cke_skin_v2 .cke_top, .cke_skin_v2 .cke_bottom, .cke_shared .cke_skin_v2, .cke_skin_v2 .cke_label, .cke_skin_v2 .cke_button .cke_off
-// {
-//   background-color: $uiColor !important;
-//   border: 1px solid $uiColor !important;
-// }
-// .cke_skin_v2 .cke_label, .cke_skin_v2 .cke_button .cke_off
-// {
-//   border: 1px solid $uiColor !important;
-// }
-// .cke_skin_v2 .cke_label :hover, .cke_skin_v2 .cke_button .cke_off :hover
-// {
-//   border: 1px solid blue !important;
-// }
-// </style>
-// EOM
-// ;
-//     }
-    $content .= $ckEditor->editor($options['name'], $value);
+    // We can NOT load this from app_a_static_url because of same-domain JS restrictions.
+    // But we do have to support the whole site being in a subdir (WH)
+    $stem = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
+    $webPath = $stem . '/apostropheCkEditorPlugin/js/ckeditor/ckeditor.js';
 
+    // Load CkEditor only once. If they already did it in view.yml
+    // gracefully bail out
+    $content = <<<EOM
+<script type="text/javascript" charset="utf-8">
+window.CKEDITOR_BASEPATH = "$ckeditorPath";
+(function() {
+  if (!window.apostropheCkEditorLoaded)
+  {
+    var exists = false;
+    $('script').each(function() {
+      var src = $(this).attr('src');
+      if (src === "$webPath")
+      {
+        exists = true;
+        window.apostropheCkEditorLoaded = true;
+      }
+    });
+    if (!exists)
+    {
+      $.getScript("$webPath", function() {
+        window.apostropheCkEditorLoaded = true;
+      });
+    }
+  }
+})();
+</script>
+EOM
+;
+    $textareaMarkup = $ckEditor->textareaMarkup($options['name'], $value);
+    $editorJavascript = $ckEditor->editorJavascript($options['name'], $value);
+    
     // Skip the braindead 'type='text'' hack that breaks Safari
     // in 1.0 compat mode, since we're in a 1.2+ widget here for sure
 
-    // We must register an a.onSubmit handler to be sure of updating the
-    // hidden field when a richtext slot or other AJAX context is updated
+    // Wait for apostropheCkEditorLoaded to be set, then finish
+    // initialization
     $content .= <<<EOM
+    $textareaMarkup
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  // The hidden textarea has no id, we have to go by name
-  var textarea = $('[name="$name"]');
-  textarea.addClass('a-needs-update');
-  textarea.bind('a.update', function() {
-    apostrophe.log("Well we got this far");
-    var value = CKEDITOR.instances['$name'].getData();
-    apostrophe.log(value);
-    textarea.val(value);
-  });
-  CKEDITOR.instances['$name'].on('instanceReady', function (evt) 
+  initializeEditor();
+  function initializeEditor()
   {
-    var editor = evt.editor;
-    // http://cksource.com/forums/viewtopic.php?p=48574#p48574
-    if (CKEDITOR.env.webkit && parseInt(editor.config.width) < 310) 
+    if (window.apostropheCkEditorLoaded)
     {
-      var iframe = document.getElementById('cke_contents_' + editor.name).firstChild;
-      iframe.style.display = 'none';
-      iframe.style.display = 'block';
+      if (window.CKEDITOR.instances['$name']) 
+      { 
+        delete window.CKEDITOR.instances['$name'];
+      };
+      $editorJavascript
+      // The hidden textarea has no id, we have to go by name
+      var textarea = $('[name="$name"]');
+      textarea.addClass('a-needs-update');
+      textarea.bind('a.update', function() {
+        var value = window.CKEDITOR.instances['$name'].getData();
+        apostrophe.log(value);
+        textarea.val(value);
+      });
+      window.CKEDITOR.instances['$name'].on('instanceReady', function (evt) 
+      {
+        var editor = evt.editor;
+        // http://cksource.com/forums/viewtopic.php?p=48574#p48574
+        if (window.CKEDITOR.env.webkit && parseInt(editor.config.width) < 310) 
+        {
+          var iframe = document.getElementById('cke_contents_' + editor.name).firstChild;
+          iframe.style.display = 'none';
+          iframe.style.display = 'block';
+        }
+      });
     }
-  });
+    else
+    {
+      window.setTimeout(initializeEditor, 50);
+    }
+  }
 });
 </script>
 EOM
