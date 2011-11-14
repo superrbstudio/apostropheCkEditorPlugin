@@ -181,7 +181,6 @@ $(function() {
       textarea.addClass('a-needs-update');
       textarea.bind('a.update', function() {
         var value = window.CKEDITOR.instances['$name'].getData();
-        apostrophe.log(value);
         textarea.val(value);
       });
       window.CKEDITOR.instances['$name'].on('instanceReady', function (evt) 

@@ -447,7 +447,6 @@ class aCkEditorOverrideable
 
 		// Skip relative paths...
 		if (strpos($ckeditorPath, '..') !== 0) {
-		  error_log($ckeditorPath);
 			$out .= $this->script("window.CKEDITOR_BASEPATH='". $ckeditorPath ."';");
 		}
 
