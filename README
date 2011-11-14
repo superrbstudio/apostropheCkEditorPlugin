@@ -9,7 +9,8 @@ KNOWN PROBLEMS
 INSTALLATION
 
 * Add this plugin and enable it in ProjectConfiguration.class.php
-* Set app_a_editor to ck
+* Set app_a_editor to ck in app.yml
+* symfony plugin:publish-assets
 * symfony cc
 
 Boom! ckeditor replaces fckeditor in rich text slots. And everywhere else
