@@ -10,16 +10,6 @@ INSTALLATION
 
 * Add this plugin and enable it in ProjectConfiguration.class.php
 * Set app_a_editor to ck
-* Add - /apostropheCkEditorPlugin/js/ckeditor/ckeditor.js to your javascripts list 
-in view.yml. You must turn off the minifier for this file. Note that your Apostrophe 1.5 plugin must be up to date with svn commit [3845] for this feature to work:
-
-default:
-   javascripts:
-    # ckeditor needs to see itself in a script src tag, 
-    # so don't attempt to minify it in with the rest. 
-    # Also it comes preminified
-    - /apostropheCkEditorPlugin/js/ckeditor/ckeditor.js: { data-minify: 0 }
-
 * symfony cc
 
 Boom! ckeditor replaces fckeditor in rich text slots. And everywhere else
