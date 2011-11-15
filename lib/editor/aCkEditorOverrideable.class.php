@@ -127,7 +127,7 @@ class aCkEditorOverrideable
 		foreach ($this->textareaAttributes as $key => $val) {
 			$attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
 		}
-		$out = "<textarea name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea>\n";
+		$out = "<textarea style=\"opacity:0;\" name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea>\n";
 		if (!$this->initialized) {
 			$out .= $this->init();
 		}
@@ -557,7 +557,7 @@ class aCkEditorOverrideable
 		foreach ($this->textareaAttributes as $key => $val) {
 			$attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
 		}
-		$out = "<textarea name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea>\n";
+		$out = "<div class=\"a-richtext-textarea-wrapper\"><textarea class=\"a-richtext-textarea ck\" name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea></div>\n";
 		return $out;
 	}
 	
