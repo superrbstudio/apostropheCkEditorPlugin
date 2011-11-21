@@ -4,7 +4,6 @@ KNOWN PROBLEMS
 
 * We fixed a bug with percentage widths and the kama skin in our own version, "aDefault," so that's the default skin you get. Not really a problem, just something to be aware of
 * I have not made a spellchecker available because ckeditor's spellchecker is an ad-supported product from spellcheck.net, probably not something our clients want. Maybe this will mature: http://cksource.com/forums/viewtopic.php?f=11&t=15893
-* Loading it all the time via view.yml is a bit inefficient. However the design of the CKEditor seems to make this hard to avoid, because they call document.write() in their loader code, somethign that would wreck the whole page if done at AJAX time. They also expect to see themselves in a script src tag in the DOM
 
 INSTALLATION
 
