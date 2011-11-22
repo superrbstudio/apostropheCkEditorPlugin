@@ -12,6 +12,42 @@ INSTALLATION
 * symfony plugin:publish-assets
 * symfony cc
 
+CUSTOMIZING CK EDITOR TOOLBARS
+
+Instead of using ckextraconfig.js in the project's JS folder, you can simply set your toolbars in app.yml.
+We prefer this syntax because it resembles the JS syntax.
+
+a:
+  ckEditor_toolbars:
+    Default:
+      - ['Format']
+      - ['Bold','Italic']
+      - ['Outdent','Indent','Blockquote']
+      - ['OrderedList','UnorderedList']
+      - ['-','Link','Unlink','Anchor','-','Table']
+      - ['FitWindow','Source']
+    Main:
+      - ['Format']
+      - ['Bold','Italic']
+      - ['Outdent','Indent','Blockquote']
+      - ['OrderedList','UnorderedList']
+      - ['-','Link','Unlink','Anchor','-','Table']
+      - ['FitWindow','Source']
+    Sidebar:
+      - ['Format']
+      - ['Bold','Italic']
+      - ['Outdent','Indent','Blockquote']
+      - ['OrderedList','UnorderedList']
+      - ['Link','Unlink','Anchor']
+      - ['Table']
+      - ['FitWindow','Source']
+    Media: 
+      - ['Bold','Italic']
+      - ['Outdent','Indent','Blockquote']
+      - ['Link','Unlink','Anchor']
+      - ['Source']
+
+
 Boom! ckeditor replaces fckeditor in rich text slots. And everywhere else
 in Apostrophe.
 
