@@ -1018,6 +1018,7 @@ display: none;
 display: inline-block;
 float: left;
 margin-top: 5px;
+display: none;
 }
 .cke_skin_adefault .cke_rtl .cke_path {
 float: right;
