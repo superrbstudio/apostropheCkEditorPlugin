@@ -49,20 +49,68 @@ class aEditorCk extends aEditor
     // If you override this to add toolbars, you must also reproduce the settings here
     // for the existing toolbars
     $toolbars = sfConfig::get('app_a_ckEditor_toolbars', 
+    
+    
+      // ckEditor_toolbars:
+      //     Default:
+      //       - ['Format']
+      //       - ['Bold','Italic']
+      //       - ['Outdent','Indent','Blockquote']
+      //       - ['OrderedList','UnorderedList']
+      //       - ['-','Link','Unlink','Anchor','-','Table']
+      //       - ['FitWindow','Source']
+      //     Main:
+      //       - ['Format']
+      //       - ['Bold','Italic']
+      //       - ['Outdent','Indent','Blockquote']
+      //       - ['OrderedList','UnorderedList']
+      //       - ['-','Link','Unlink','Anchor','-','Table']
+      //       - ['FitWindow','Source']
+      //     Sidebar:
+      //       - ['Format']
+      //       - ['Bold','Italic']
+      //       - ['Outdent','Indent','Blockquote']
+      //       - ['OrderedList','UnorderedList']
+      //       - ['Link','Unlink','Anchor']
+      //       - ['Table']
+      //       - ['FitWindow','Source']
+      //     Media: 
+      //       - ['Bold','Italic']
+      //       - ['Outdent','Indent','Blockquote']
+      //       - ['Link','Unlink','Anchor']
+      //       - ['Source']
+      // 
+    
       array(
         'Default' => array(
-          array('Format', 'Bold', 'Italic', 'Blockquote'),
-          array('NumberedList','BulletedList','-','Link','Unlink','Anchor','-','Table',
-        '-','FitWindow', 'Source')),
+          array('Format'),
+          array('Bold', 'Italic'),
+          array('Outdent', 'Indent', 'Blockquote'),
+          array('NumberedList','BulletedList'),
+          array('Link','Unlink','Anchor','-','Table'),
+          array('Maximize', 'Source')
+        ),
         'Main' => array(
-            array('Format', 'Bold', 'Italic', 'Blockquote'),
-            array('NumberedList','BulletedList','-','Link','Unlink','Anchor','-','Table','-','FitWindow','Source')),
+          array('Format'),
+          array('Bold', 'Italic'),
+          array('Outdent', 'Indent', 'Blockquote'),
+          array('NumberedList','BulletedList'),
+          array('Link','Unlink','Anchor','-','Table'),
+          array('Maximize', 'Source'),
+        ),
         'Sidebar' => array(
-            array('Format', 'Bold', 'Italic', 'Blockquote'),
-            array('NumberedList','BulletedList','-','Link','Unlink','Anchor'),
-            array('Source')),
+          array('Format'),
+          array('Bold', 'Italic'),
+          array('Outdent', 'Indent', 'Blockquote'),
+          array('NumberedList','BulletedList'),
+          array('Link','Unlink','Anchor','-','Table'),
+          array('Maximize', 'Source'),
+        ),
         'Media' => array(
-            array('Bold', 'Italic', '-','Link', 'Unlink','Anchor', '-', 'Source'))));
+            array('Bold', 'Italic', '-','Link', 'Unlink','Anchor', '-', 'Source'),
+        ),
+      )
+    );
     if (isset($toolbars[$options['tool']]))
     {
       $toolbar = $toolbars[$options['tool']];
