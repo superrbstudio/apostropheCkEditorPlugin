@@ -424,7 +424,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													id : 'txtWidth',
 													style : 'width:5em',
 													label : editor.lang.common.width,
-													'default' : 500,
+													'default' : editor.config.table_defaultWidth ? editor.config.table_defaultWidth : 200,
 													validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidWidth ),
 
 													// Extra labelling of width unit type.
@@ -468,7 +468,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													type : 'select',
 													label : editor.lang.table.widthUnit,
 													labelStyle: 'visibility:hidden',
-													'default' : 'pixels',
+													'default' : editor.config.table_defaultWidthUnit ? editor.config.table_defaultWidthUnit : 'pixels',
 													items :
 													[
 														[ editor.lang.table.widthPx , 'pixels'],
