@@ -93,6 +93,15 @@ display: block;
 _display: inline-block;
 padding: 5px;
 }
+
+.cke_skin_adefault .cke_maximized .cke_wrapper
+{
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background: #efefef !important;  
+}
+
 .cke_shared .cke_skin_adefault .cke_wrapper {
 padding-bottom: 0;
 }
