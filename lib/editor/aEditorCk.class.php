@@ -164,7 +164,7 @@ class aEditorCk extends aEditor
     }
 
     $ckEditor->config['toolbar'] = $toolbar;
-    $ckEditor->config['format_tags'] = sfConfig::get('app_a_ckEditor_format_tags', 'p;h3;h4;h5;h6;pre');
+    $ckEditor->config['format_tags'] = sfConfig::get('app_a_ckEditor_format_tags', isset($ckEditor->config['format_tags']) ? $ckEditor->config['format_tags'] : 'p;h3;h4;h5;h6;pre');
     // We have to clobber the editor if CKEditor thinks it already exists. It would be nice to reuse it
     // but we already pulled it out of the DOM to work with Apostrophe's refresh model for edit views.
     // http://stackoverflow.com/questions/2310111/uncaught-ckeditor-editor-the-instance-html-already-exists
