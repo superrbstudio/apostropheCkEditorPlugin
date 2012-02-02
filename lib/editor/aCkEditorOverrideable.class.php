@@ -88,7 +88,6 @@ class aCkEditorOverrideable
 	function __construct($basePath = null) {
 		if (!empty($basePath)) {
 			$this->basePath = $basePath;
-			error_log($basePath);
 		}
 	}
 
